@@ -8,6 +8,7 @@ public class SpotViperApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(SpotViperApplication.class, args);
+        System.out.println("SpotViperApplication started successfully.");
     }
 
 }

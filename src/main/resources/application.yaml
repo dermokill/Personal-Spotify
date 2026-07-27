@@ -1,0 +1,43 @@
+spring:
+  application:
+    name: SpotViper
+
+  datasource:
+    url: jdbc:mysql://localhost:3306/spotViper?createDatabaseIfNotExist=true&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+    username: ${MYSQL_USER:root}
+    password: ${MYSQL_PASSWORD:}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  jpa:
+    hibernate:
+      # Prototyping only. Schema ownership will move to Flyway migrations later.
+      ddl-auto: update
+    open-in-view: false
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        dialect: org.hibernate.dialect.MySQLDialect
+
+server:
+  port: ${SERVER_PORT:5000}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+  endpoint:
+    health:
+      show-details: when_authorized
+
+# Application-specific settings.
+app:
+  cors:
+    # Web (Vite) and other local frontends. Override via APP_CORS_ALLOWED_ORIGINS (comma-separated).
+    allowed-origins: ${APP_CORS_ALLOWED_ORIGINS:http://localhost:5173,http://localhost:3000}
+
+logging:
+  level:
+    com.spotviper: DEBUG
+    org.hibernate.SQL: DEBUG

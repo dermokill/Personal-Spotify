@@ -31,3 +31,10 @@ build/
 
 ### VS Code ###
 .vscode/
+
+### Mac ###
+.DS_Store
+
+### Copilot ###
+plan-spotifyClone.prompt.md
+context-spotifyClone.md
