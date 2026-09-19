@@ -2,9 +2,11 @@ package com.spotviper.entities;
 
 import com.spotviper.entities.enums.Role;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -29,6 +31,7 @@ import java.util.UUID;
 @Getter
 @Setter
 @NoArgsConstructor
+@ToString
 public class User {
 
     @Id
@@ -40,6 +43,7 @@ public class User {
     private String username;
 
     @Column(nullable = false, length = 255)
+    @Email
     private String email;
 
     /** BCrypt hash of the password. Never stores the raw value. */
@@ -69,5 +73,15 @@ public class User {
         this.email = email;
         this.passwordHash = passwordHash;
         this.displayName = displayName;
+    }
+
+    public User(String username, String email, String passwordHash, String displayName,
+                Role role, String avatarKey) {
+        this.username = username;
+        this.email = email;
+        this.passwordHash = passwordHash;
+        this.displayName = displayName;
+        this.role = role;
+        this.avatarKey = avatarKey;
     }
 }

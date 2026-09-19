@@ -1,6 +1,7 @@
 package com.spotviper;
 
 import com.spotviper.entities.User;
+import com.spotviper.entities.enums.Role;
 import com.spotviper.repositories.UserRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -22,11 +23,10 @@ public class SpotViperApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-
-        if (userRepository.findByUsername("johndoe").isEmpty()) {
-            User user = new User("johndoe", "john.doe@example.com", "{noop}changeme", "John Doe");
-            userRepository.save(user);
+        if (!userRepository.existsByEmail("john.doe@example.com")) {
+            User user = new User("johndoe", "john.doe@example.com",
+                    "{noop}changeme", "John Doe", Role.USER, "key");
+            System.out.println(userRepository.save(user));
         }
-
     }
 }
